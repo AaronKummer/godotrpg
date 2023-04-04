@@ -1,15 +1,47 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://World/bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://World/GrassBackground.png" type="Texture" id=3]
 
-[node name="world" type="YSort"]
+[node name="world" type="Node2D"]
 
-[node name="player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 0, 0 )
+[node name="YSort" type="YSort" parent="."]
 
-[node name="bush" parent="." instance=ExtResource( 1 )]
-position = Vector2( 36, 45 )
+[node name="player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 284, 162 )
 
-[node name="bush2" parent="." instance=ExtResource( 1 )]
-position = Vector2( 121, 27 )
+[node name="Camera2D" type="Camera2D" parent="YSort/player"]
+current = true
+zoom = Vector2( 1.5, 1.5 )
+smoothing_enabled = true
+
+[node name="bush" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 105, 37 )
+
+[node name="bush3" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 366, 101 )
+
+[node name="bush2" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 195, 186 )
+
+[node name="bush4" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 338, 377 )
+
+[node name="bush5" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 70, 258 )
+
+[node name="bush6" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 533, 236 )
+
+[node name="bush7" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 226, 52 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 1, 0 )
+scale = Vector2( 0.734375, 0.65625 )
+z_index = -1
+texture = ExtResource( 3 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 751, 925 )
