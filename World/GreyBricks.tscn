@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://World/city.png" type="Texture" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9.5, 16 )
+
+[node name="StaticBody2D" type="StaticBody2D"]
+position = Vector2( 44, 35 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( -1.99998, 6 )
+scale = Vector2( 0.322266, 0.3125 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 320, 15, 59, 106 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -2, 5 )
+shape = SubResource( 1 )
