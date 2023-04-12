@@ -36,7 +36,7 @@ func _physics_process(delta):
 
 	velocity = move_and_slide(velocity)
 
-	if is_close_to_cpu() and Input.is_action_just_pressed("open_terminal"):
+	if is_close_to_cpu() and Input.is_action_just_pressed("action"):
 		print("Entering the matrix")
 		get_parent().get_parent().get_node("Terminal").open_terminal()
 
