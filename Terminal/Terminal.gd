@@ -3,6 +3,9 @@ extends Control
 onready var text_edit = $TextEdit
 onready var terminal_output = $TerminalOutput
 
+func use():
+	open_terminal()
+
 func _ready():
 	pass
 

@@ -1,8 +1,9 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Player/player.gd" type="Script" id=1]
 [ext_resource path="res://Player/pizzaGuyNoPizza.png" type="Texture" id=2]
 [ext_resource path="res://Player/light-gradient.png" type="Texture" id=3]
+[ext_resource path="res://Player/PlayerInteractionArea.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -152,16 +153,25 @@ tracks/0/keys = {
 "values": [ 9, 10, 11 ]
 }
 
+[sub_resource type="CapsuleShape2D" id=11]
+radius = 6.81303
+height = 9.02545
+
+[sub_resource type="GDScript" id=12]
+
+[sub_resource type="GradientTexture" id=13]
+
 [node name="player" type="KinematicBody2D"]
-position = Vector2( 272, 125 )
+position = Vector2( 109, 41 )
+scale = Vector2( 1.148, 1 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 2 )
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -177,7 +187,7 @@ vframes = 4
 frame = 6
 
 [node name="PlayerLight" type="Light2D" parent="."]
-position = Vector2( 2.00002, -1 )
+position = Vector2( 6.96865, 5 )
 scale = Vector2( 0.618111, 0.57029 )
 z_index = 1
 texture = ExtResource( 3 )
@@ -200,3 +210,44 @@ anims/walk_down = SubResource( 6 )
 anims/walk_left = SubResource( 4 )
 anims/walk_right = SubResource( 3 )
 anims/walk_up = SubResource( 5 )
+
+[node name="PlayerInteractionArea" type="Area2D" parent="."]
+position = Vector2( -45.2962, 2 )
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerInteractionArea"]
+position = Vector2( 54.0035, -1.8548 )
+rotation = 1.57952
+shape = SubResource( 11 )
+script = SubResource( 12 )
+
+[node name="Sprite" type="Sprite" parent="PlayerInteractionArea/CollisionShape2D"]
+visible = false
+position = Vector2( 0.301, -0.0484836 )
+scale = Vector2( 0.005, 20.8527 )
+texture = SubResource( 13 )
+
+[node name="Dialog" type="Control" parent="."]
+visible = false
+margin_left = -80.0
+margin_top = -115.0
+margin_right = 133.0
+margin_bottom = -26.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Panel" type="Panel" parent="Dialog"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_top = -2.0
+margin_right = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Dialog/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 3.0
+margin_bottom = 3.0
