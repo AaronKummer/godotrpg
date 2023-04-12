@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/DirtTileset.png-4e52e2a032d2a3147ded644a2054b3ec.stex"
+path="res://.import/cpu.png-08ce9d45152302516aee8409f4421b7c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/DirtTileset.png"
-dest_files=[ "res://.import/DirtTileset.png-4e52e2a032d2a3147ded644a2054b3ec.stex" ]
+source_file="res://Terminal/cpu.png"
+dest_files=[ "res://.import/cpu.png-08ce9d45152302516aee8409f4421b7c.stex" ]
 
 [params]
 

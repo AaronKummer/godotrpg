@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Grass.png-c8db04a845a94a62395b8fc264a498a7.stex"
+path="res://.import/green-radial-gradient.png-f4aba21e7ae25c24eb6b9fe1baf2c2f6.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/Grass.png"
-dest_files=[ "res://.import/Grass.png-c8db04a845a94a62395b8fc264a498a7.stex" ]
+source_file="res://Lights/green-radial-gradient.png"
+dest_files=[ "res://.import/green-radial-gradient.png-f4aba21e7ae25c24eb6b9fe1baf2c2f6.stex" ]
 
 [params]
 

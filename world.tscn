@@ -1,17 +1,83 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://World/cpu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Terminal/cpu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World/GreyBricks.tscn" type="PackedScene" id=3]
-[ext_resource path="res://World/Terminal.tscn" type="PackedScene" id=4]
-[ext_resource path="res://World/Terminal.gd" type="Script" id=5]
+[ext_resource path="res://Lights/StreetLightPurple.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Terminal/Terminal.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Terminal/Terminal.gd" type="Script" id=5]
 [ext_resource path="res://world.gd" type="Script" id=6]
+[ext_resource path="res://World/city.png" type="Texture" id=7]
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+points = PoolVector2Array( 62, 111, 0, 111, 0, 1, 62, 1 )
+
+[sub_resource type="TileSet" id=5]
+0/name = "city.png 0"
+0/texture = ExtResource( 7 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 320, 15, 62, 111 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 4 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 4 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "city.png 1"
+1/texture = ExtResource( 7 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 258, 64, 59 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape_one_way = false
+1/shape_one_way_margin = 0.0
+1/shapes = [  ]
+1/z_index = 0
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+points = PoolVector2Array( 61.9722, 110.528, 0, 110.528, 0, 0, 61.9722, 0 )
+
+[sub_resource type="TileSet" id=7]
+0/name = "city.png 0"
+0/texture = ExtResource( 7 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 319, 16, 62, 111 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 6 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 6 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
 
 [sub_resource type="OpenSimplexNoise" id=3]
-seed = 3
-octaves = 1
+octaves = 5
 period = 256.0
-persistence = 0.43
+persistence = 0.337
 lacunarity = 0.1
 
 [sub_resource type="NoiseTexture" id=2]
@@ -25,261 +91,39 @@ script = ExtResource( 6 )
 
 [node name="YSort" type="YSort" parent="."]
 
-[node name="player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 241, 134 )
+[node name="cpu" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( -43, 145 )
 
-[node name="Camera2D" type="Camera2D" parent="YSort/player"]
-position = Vector2( 85, 65 )
-current = true
-zoom = Vector2( 2.032, 2.098 )
-smoothing_enabled = true
+[node name="Streets" type="TileMap" parent="YSort"]
+scale = Vector2( 0.5, 1.254 )
+tile_set = SubResource( 5 )
+cell_quadrant_size = 17
+cell_custom_transform = Transform2D( 62.736, 0, 0, 64, 0, 0 )
+show_collision = true
+format = 1
+tile_data = PoolIntArray( 196579, 1, 0, 196580, 1, 0, 196581, 1, 0, 196582, 1, 0, 196583, 1, 0, 196584, 1, 0, 196585, 1, 0, 196586, 1, 0, 196587, 1, 0, 196588, 1, 0, 196589, 1, 0, 196590, 1, 0, 196591, 1, 0, 196592, 1, 0, 196593, 1, 0, 196594, 1, 0, 196595, 1, 0, 196596, 1, 0, 196597, 1, 0, 196598, 1, 0, 196599, 1, 0, 196600, 1, 0, 196601, 1, 0, 196602, 1, 0, 196603, 1, 0, 196604, 1, 0, 196605, 1, 0, 196606, 1, 0, 196607, 1, 0, 131072, 1, 0, 131073, 1, 0, 131074, 1, 0, 131075, 1, 0, 131076, 1, 0, 131077, 1, 0, 131078, 1, 0, 131079, 1, 0, 131080, 1, 0, 131081, 1, 0, 131082, 1, 0, 131083, 1, 0, 131084, 1, 0, 131085, 1, 0, 131086, 1, 0, 131087, 1, 0, 131088, 1, 0, 131089, 1, 0, 131090, 1, 0, 131091, 1, 0, 131092, 1, 0, 131093, 1, 0, 131094, 1, 0, 131095, 1, 0, 131096, 1, 0, 131097, 1, 0, 131098, 1, 0, 131099, 1, 0, 131100, 1, 0, 131101, 1, 0, 131102, 1, 0, 131103, 1, 0, 131104, 1, 0, 131105, 1, 0, 131106, 1, 0, 131107, 1, 0, 131108, 1, 0, 131109, 1, 0, 131110, 1, 0, 131111, 1, 0, 131112, 1, 0, 131113, 1, 0, 131114, 1, 0, 131115, 1, 0, 131116, 1, 0, 131117, 1, 0, 131118, 1, 0, 131119, 1, 0, 131120, 1, 0, 131121, 1, 0, 131122, 1, 0, 131123, 1, 0, 131124, 1, 0, 131125, 1, 0, 131126, 1, 0, 131127, 1, 0 )
+
+[node name="Bricks" type="TileMap" parent="YSort"]
+scale = Vector2( 0.5, 0.5 )
+tile_set = SubResource( 7 )
+format = 1
+tile_data = PoolIntArray( -1179650, 0, 0, -1245184, 0, 0, -1114114, 0, 0, -1179648, 0, 0, -1048578, 0, 0, -1114112, 0, 0, -983042, 0, 0, -1048576, 0, 0, -917506, 0, 0, -983040, 0, 0, -851970, 0, 0, -917504, 0, 0, -786434, 0, 0, -851968, 0, 0, -720898, 0, 0, -786432, 0, 0, -655362, 0, 0, -720896, 0, 0, -589826, 0, 0, -655360, 0, 0, -524290, 0, 0, -589824, 0, 0, -458754, 0, 0, -524288, 0, 0, -393218, 0, 0, -458752, 0, 0, -327682, 0, 0, -393216, 0, 0, -262146, 0, 0, -327680, 0, 0, -196610, 0, 0, -262144, 0, 0, -131074, 0, 0, -196608, 0, 0, -65538, 0, 0, -131072, 0, 0, -2, 0, 0, -65536, 0, 0, 65534, 0, 0, 0, 0, 0, 131043, 0, 0, 131044, 0, 0, 131045, 0, 0, 131046, 0, 0, 131047, 0, 0, 131048, 0, 0, 131049, 0, 0, 131050, 0, 0, 131051, 0, 0, 131052, 0, 0, 131053, 0, 0, 131054, 0, 0, 131055, 0, 0, 131056, 0, 0, 131057, 0, 0, 131058, 0, 0, 131059, 0, 0, 131060, 0, 0, 131061, 0, 0, 131062, 0, 0, 131063, 0, 0, 131064, 0, 0, 131065, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65542, 0, 0, 65543, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 65547, 0, 0, 65548, 0, 0, 65549, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 65553, 0, 0, 65554, 0, 0, 65555, 0, 0, 65556, 0, 0, 65557, 0, 0, 65558, 0, 0, 65565, 0, 0, 65566, 0, 0, 65567, 0, 0, 65568, 0, 0, 65569, 0, 0, 65570, 0, 0, 65571, 0, 0, 65572, 0, 0, 65573, 0, 0, 65574, 0, 0, 65575, 0, 0, 65576, 0, 0, 65577, 0, 0, 65578, 0, 0, 65579, 0, 0, 65580, 0, 0, 65581, 0, 0, 65582, 0, 0, 65583, 0, 0, 65584, 0, 0, 65585, 0, 0, 65586, 0, 0, 65587, 0, 0, 65588, 0, 0, 65589, 0, 0, 65590, 0, 0, 65591, 0, 0 )
 
 [node name="StaticBody2D" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 12, 65 )
+position = Vector2( -386, 145 )
 
 [node name="StaticBody2D2" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 30, 65 )
+position = Vector2( 650, 135 )
 
 [node name="StaticBody2D3" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 47, 65 )
+position = Vector2( 1535, 142 )
 
-[node name="StaticBody2D4" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 63, 65 )
-
-[node name="StaticBody2D5" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 82, 65 )
-
-[node name="StaticBody2D6" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 99, 65 )
-
-[node name="StaticBody2D7" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 116, 65 )
-
-[node name="StaticBody2D8" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 131, 65 )
-
-[node name="StaticBody2D9" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 148, 65 )
-
-[node name="StaticBody2D10" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 166, 65 )
-
-[node name="StaticBody2D11" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 185, 65 )
-
-[node name="StaticBody2D12" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 203, 65 )
-
-[node name="StaticBody2D13" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 221, 65 )
-
-[node name="StaticBody2D14" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 235, 65 )
-
-[node name="StaticBody2D15" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 275, 65 )
-
-[node name="StaticBody2D16" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 289, 65 )
-
-[node name="StaticBody2D17" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 307, 65 )
-
-[node name="StaticBody2D18" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 324, 65 )
-
-[node name="StaticBody2D19" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 341, 65 )
-
-[node name="StaticBody2D20" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 357, 65 )
-
-[node name="StaticBody2D21" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 374, 65 )
-
-[node name="StaticBody2D22" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 392, 65 )
-
-[node name="StaticBody2D23" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 402, 65 )
-
-[node name="StaticBody2D24" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 413, 65 )
-
-[node name="cpu" parent="YSort" instance=ExtResource( 1 )]
-position = Vector2( 78, 105 )
-
-[node name="StaticBody2D25" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 13, 159 )
-
-[node name="StaticBody2D26" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 29, 159 )
-
-[node name="StaticBody2D27" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 47, 159 )
-
-[node name="StaticBody2D28" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 61, 159 )
-
-[node name="StaticBody2D29" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 76, 159 )
-
-[node name="StaticBody2D30" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 95, 159 )
-
-[node name="StaticBody2D31" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 113, 159 )
-
-[node name="StaticBody2D32" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 129, 159 )
-
-[node name="StaticBody2D33" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 147, 159 )
-
-[node name="StaticBody2D34" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 161, 159 )
-
-[node name="StaticBody2D35" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 176, 159 )
-
-[node name="StaticBody2D36" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 195, 159 )
-
-[node name="StaticBody2D37" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 213, 159 )
-
-[node name="StaticBody2D38" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 229, 159 )
-
-[node name="StaticBody2D39" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 247, 159 )
-
-[node name="StaticBody2D40" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 261, 159 )
-
-[node name="StaticBody2D41" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 276, 159 )
-
-[node name="StaticBody2D42" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 295, 159 )
-
-[node name="StaticBody2D43" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 312, 159 )
-
-[node name="StaticBody2D44" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 328, 159 )
-
-[node name="StaticBody2D45" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 346, 159 )
-
-[node name="StaticBody2D46" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 360, 159 )
-
-[node name="StaticBody2D47" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 375, 159 )
-
-[node name="StaticBody2D48" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 394, 159 )
-
-[node name="StaticBody2D49" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 409, 159 )
-
-[node name="StaticBody2D50" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 425, 159 )
-
-[node name="StaticBody2D51" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 443, 159 )
-
-[node name="StaticBody2D52" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 457, 159 )
-
-[node name="StaticBody2D53" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 472, 159 )
-
-[node name="StaticBody2D54" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 491, 159 )
-
-[node name="StaticBody2D55" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 508, 159 )
-
-[node name="StaticBody2D56" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 524, 159 )
-
-[node name="StaticBody2D57" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 542, 159 )
-
-[node name="StaticBody2D58" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 556, 159 )
-
-[node name="StaticBody2D59" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 571, 159 )
-
-[node name="StaticBody2D60" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 590, 159 )
-
-[node name="StaticBody2D61" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 428, 65 )
-
-[node name="StaticBody2D62" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 444, 65 )
-
-[node name="StaticBody2D63" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 462, 65 )
-
-[node name="StaticBody2D64" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 476, 65 )
-
-[node name="StaticBody2D65" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 491, 65 )
-
-[node name="StaticBody2D66" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 510, 65 )
-
-[node name="StaticBody2D67" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 525, 65 )
-
-[node name="StaticBody2D68" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 541, 65 )
-
-[node name="StaticBody2D69" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 559, 65 )
-
-[node name="StaticBody2D70" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 573, 65 )
-
-[node name="StaticBody2D71" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 588, 65 )
-
-[node name="StaticBody2D72" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 607, 65 )
-
-[node name="StaticBody2D73" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 622, 65 )
-
-[node name="StaticBody2D74" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 630, 65 )
-
-[node name="StaticBody2D75" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 546, 158 )
-
-[node name="StaticBody2D76" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 542, 160 )
-
-[node name="StaticBody2D77" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 580, 158 )
-
-[node name="StaticBody2D78" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 594, 158 )
-
-[node name="StaticBody2D79" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 609, 158 )
-
-[node name="StaticBody2D80" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 628, 158 )
+[node name="player" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 194, 97 )
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.541176, 0.462745, 0.462745, 1 )
-position = Vector2( -818, -657 )
+position = Vector2( -923, -484 )
 scale = Vector2( 1.20421, 0.777741 )
 z_index = -1
 texture = SubResource( 2 )
@@ -294,3 +138,6 @@ margin_top = 1.0
 margin_right = 2.0
 margin_bottom = 1.0
 script = ExtResource( 5 )
+
+[node name="Darker" type="CanvasModulate" parent="."]
+color = Color( 0.0705882, 0.0627451, 0.0745098, 1 )
