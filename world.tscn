@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Terminal/cpu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=2]
@@ -91,6 +91,26 @@ extents = Vector2( 18.125, 667.75 )
 [sub_resource type="RectangleShape2D" id=9]
 extents = Vector2( 1328.75, 10 )
 
+[sub_resource type="Environment" id=10]
+background_mode = 4
+ambient_light_color = Color( 0.694118, 0.803922, 0.780392, 1 )
+ambient_light_energy = 11.41
+ambient_light_sky_contribution = 0.44
+fog_sun_amount = 0.23
+glow_enabled = true
+glow_intensity = 3.34
+glow_strength = 0.93
+glow_bloom = 0.15
+glow_blend_mode = 1
+glow_hdr_threshold = 0.37
+glow_hdr_luminance_cap = 45.58
+glow_hdr_scale = 0.47
+glow_high_quality = true
+adjustment_enabled = true
+adjustment_brightness = 1.47
+adjustment_contrast = 1.09
+adjustment_saturation = 0.91
+
 [node name="world" type="Node2D"]
 script = ExtResource( 6 )
 
@@ -125,9 +145,6 @@ position = Vector2( 1535, 142 )
 
 [node name="player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 194, 97 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 modulate = Color( 0.541176, 0.462745, 0.462745, 1 )
@@ -170,3 +187,9 @@ margin_left = -117.0
 margin_top = 57.0
 margin_right = -117.0
 margin_bottom = 57.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 10 )
+
+[node name="StaticBody2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 341, 140 )

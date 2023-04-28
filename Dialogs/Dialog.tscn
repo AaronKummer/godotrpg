@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Player/RichTextLabel.gd" type="Script" id=1]
+
+[node name="Dialog" type="Control"]
+margin_left = -80.0
+margin_top = -115.0
+margin_right = 133.0
+margin_bottom = -26.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -1.0
+margin_top = -2.0
+margin_right = 2.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 3.0
+margin_bottom = 3.0
+script = ExtResource( 1 )

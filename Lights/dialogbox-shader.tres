@@ -1,0 +1,25 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+
+uniform float thickness : hint_range(1.0, 8.0) = 2.0;
+uniform vec4 outline_color : hint_color = vec4(1, 0, 1, 1);
+
+void vertex() {
+	vec4 vertex_color = COLOR;
+	COLOR = outline_color;
+	
+	float alpha = 0.0;
+	for (int x = -1; x <= 1; x++) {
+		for (int y = -1; y <= 1; y++) {
+			vec4 offset = vec4(float(x) * thickness / SCREEN_PIXEL_SIZE.x, float(y) * thickness / SCREEN_PIXEL_SIZE.y, 0.0, 0.0);
+			alpha = max(alpha, texture(TEXTURE, UV + offset.xy).a);
+		}
+	}
+	
+	COLOR.a *= alpha;
+	
+	VERTEX = VERTEX;
+}
+"
