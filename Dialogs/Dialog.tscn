@@ -1,12 +1,10 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://Player/RichTextLabel.gd" type="Script" id=1]
+[gd_scene format=2]
 
 [node name="Dialog" type="Control"]
-margin_left = -80.0
-margin_top = -115.0
-margin_right = 133.0
-margin_bottom = -26.0
+margin_left = 42.0
+margin_top = 38.0
+margin_right = 290.0
+margin_bottom = 159.0
 __meta__ = {
 "_edit_group_": true
 }
@@ -25,4 +23,4 @@ margin_left = 3.0
 margin_top = 3.0
 margin_right = 3.0
 margin_bottom = 3.0
-script = ExtResource( 1 )
+text = "asdasdasdasdasdasdasd"

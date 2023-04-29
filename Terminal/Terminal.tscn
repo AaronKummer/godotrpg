@@ -38,10 +38,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="TextEdit" type="TextEdit" parent="."]
-margin_left = 49.0
-margin_top = 88.0
-margin_right = 153.0
-margin_bottom = 103.0
+margin_left = 50.0
+margin_top = 87.0
+margin_right = 154.0
+margin_bottom = 102.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )

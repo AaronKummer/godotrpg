@@ -2,19 +2,20 @@ extends KinematicBody2D
 
 const SPEED = 80
 const INTERACTION_DISTANCE = 40
+
 var velocity = Vector2.ZERO
 var last_direction = Vector2.ZERO
 var cpu: Node
+var dialog_open = false
+
 onready var animation = $AnimationPlayer
 onready var interaction_area = $PlayerInteractionArea
 onready var interaction_shape = $PlayerInteractionArea/CollisionShape2D
 
-onready var dialog_scene = load("res://dialogs/Dialog.tscn")
-var terminal_output = null
-var dialog_text = null
-# onready var dialogtext = load("res://Dialogs/Dialog.tscn").find_node("Panel/RichTextLabel")
-# onready var dialogbox = load("res://Dialogs/Dialog.tscn").find_node("Dialog")
-
+onready var dialog_canvas = get_node("../../../world/DialogCanvasLayer")
+onready var dialog_root = dialog_canvas.get_node("Dialog")
+onready var dialog_panel = dialog_root.get_node("Panel")
+onready var dialog_text = dialog_panel.get_node("RichTextLabel")
 
 var options = ["Exit", "Pick up", "Use"]
 var current_option_index = 0
@@ -22,79 +23,92 @@ var items = []
 
 func _ready():
 	cpu = get_parent().get_node("cpu")
-	var terminal_node = get_node("../../Terminal")  # replace with the correct path
-	terminal_output = terminal_node.get_node("TerminalOutput")
-
-
 
 func can_pickup():
-	if interaction_area.get_closest_object().name == "cpu":
-		return true
+	return interaction_area.get_closest_object().name == "cpu"
 
 func display_options():
-	terminal_output.clear()
 	for i in range(len(options)):
 		if i == current_option_index:
-			terminal_output.append_bbcode("[color=red]" + options[i] + "[/color]")
+			dialog_text.append_bbcode("[color=red]" + options[i] + "[/color]\n")
 		else:
-			terminal_output.append_bbcode(options[i])
-		terminal_output.newline()
+			dialog_text.append_bbcode(options[i] + "\n")
 
 func check_front():
 	var closest_object = interaction_area.get_closest_object()
 	if closest_object:
-		terminal_output.visible = true
 		if closest_object.name == "cpu":
-			terminal_output.append_bbcode("This appears to be a cyber deck sitting on the side of the road.")
-			terminal_output.newline()
-			terminal_output.append_bbcode("What do you want to do?")
+			dialog_open = true
+			dialog_text.bbcode_text = "This appears to be a cyber deck sitting on the side of the road.\nWhat do you want to do?"
 			display_options()
+
+func _process(delta):
+	dialog_root.visible = dialog_open
 
 func _physics_process(delta):
 	var input_x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	var input_y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 
-	velocity = Vector2(input_x, input_y).normalized() * SPEED
+	if dialog_root.visible == false :
+		velocity = Vector2(input_x, input_y).normalized() * SPEED
 
-	if velocity.length() > 0:
-		last_direction = velocity.normalized()
+		if velocity.length() > 0:
+			last_direction = velocity.normalized()
 
-		if input_x > 0:
-			animation.play("walk_right")
-		elif input_x < 0:
-			animation.play("walk_left")
-		elif input_y > 0:
-			animation.play("walk_down")
-		elif input_y < 0:
-			animation.play("walk_up")
-	else:
-		play_idle_animation()
+			if input_x > 0:
+				animation.play("walk_right")
+			elif input_x < 0:
+				animation.play("walk_left")
+			elif input_y > 0:
+				animation.play("walk_down")
+			elif input_y < 0:
+				animation.play("walk_up")
+		else:
+			play_idle_animation()
 
-	velocity = move_and_slide(velocity)
+		velocity = move_and_slide(velocity)
 
-	# Set the position of the interaction_area
-	interaction_shape.position = Vector2.ZERO
+		interaction_shape.position = Vector2.ZERO
 
-	var interaction_offset = 20
-	if last_direction.y < 0:
-		interaction_shape.rotation = 0
-		interaction_shape.position = Vector2(45, -20)
-	elif last_direction.y > 0:
-		interaction_shape.rotation = deg2rad(180)
-		interaction_shape.position = Vector2(45, 10)
-	elif last_direction.x < 0:
-		interaction_shape.rotation = deg2rad(270)
-		interaction_shape.position = Vector2(40, 0)
-	elif last_direction.x > 0:
-		interaction_shape.rotation = deg2rad(90)
-		interaction_shape.position = Vector2(50, 0)
-	
-	if not terminal_output.visible:
+		var interaction_offset = 20
+		if last_direction.y < 0:
+			interaction_shape.rotation = 0
+			interaction_shape.position = Vector2(45, -20)
+		elif last_direction.y > 0:
+			interaction_shape.rotation = deg2rad(180)
+			interaction_shape.position = Vector2(45, 10)
+		elif last_direction.x < 0:
+			interaction_shape.rotation = deg2rad(270)
+			interaction_shape.position = Vector2(40, 0)
+		elif last_direction.x > 0:
+			interaction_shape.rotation = deg2rad(90)
+			interaction_shape.position = Vector2(50, 0)
+		
 		if Input.is_action_just_pressed("action"):
-			check_front()
-			print("doing action")
+			if !dialog_open:
+				check_front()
+	
+	if dialog_root.visible:
+		handle_dialog_action()
 			
-	else:
+
+func handle_dialog_enter():
+	if current_option_index == 0:
+		dialog_open = false
+	elif current_option_index == 1 and can_pickup():
+		items.append(interaction_area.get_closest_object().name)
+		interaction_area.get_closest_object().queue_free()
+		dialog_open = false
+	elif current_option_index == 2:
+		var node_name = interaction_area.get_closest_object().name
+		var thing = get_node("..").get_node(node_name)
+		thing.use()
+		dialog_open = false
+
+func handle_dialog_action():
+	print("doing dialog stuff")
+#	
+	if dialog_open:
 		if Input.is_action_just_pressed("ui_up"):
 			current_option_index -= 1
 			if current_option_index < 0:
@@ -105,24 +119,8 @@ func _physics_process(delta):
 			if current_option_index >= len(options):
 				current_option_index = 0
 			display_options()
-			
 		if Input.is_action_just_pressed("action"):
-			if current_option_index == 0:
-				terminal_output.visible = false
-			if current_option_index == 1:
-				if can_pickup():
-					items.append(interaction_area.get_closest_object().name)
-					interaction_area.get_closest_object().queue_free()
-					terminal_output.visible = false
-			if current_option_index == 2:
-				var node_name = interaction_area.get_closest_object().name
-				print(node_name)
-				var thing = get_node("..").get_node("cpu")
-				thing.use()
-				terminal_output.visible = false
-
-		print(items)
-
+			handle_dialog_action()
 
 
 func play_idle_animation():
@@ -135,4 +133,3 @@ func play_idle_animation():
 	elif last_direction.x < 0:
 		animation.play("idle_left")
 
-			

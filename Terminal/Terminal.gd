@@ -33,6 +33,7 @@ func check_command(command):
 			print("Exiting terminal")
 			self.visible = false
 	else:
+#		print("command wtf")
 		append_output_text("Command not recognized")
 
 	text_edit.text = ""
