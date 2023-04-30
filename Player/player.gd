@@ -27,12 +27,7 @@ func _ready():
 func can_pickup():
 	return interaction_area.get_closest_object().name == "cpu"
 
-func display_options():
-	for i in range(len(options)):
-		if i == current_option_index:
-			dialog_text.append_bbcode("[color=red]" + options[i] + "[/color]\n")
-		else:
-			dialog_text.append_bbcode(options[i] + "\n")
+
 
 func check_front():
 	var closest_object = interaction_area.get_closest_object()
@@ -92,6 +87,14 @@ func _physics_process(delta):
 		handle_dialog_action()
 			
 
+func display_options():
+	dialog_text.clear()
+	for i in range(len(options)):
+		if i == current_option_index:
+			dialog_text.append_bbcode("[color=red]" + options[i] + "[/color]\n")
+		else:
+			dialog_text.append_bbcode(options[i] + "\n")
+
 func handle_dialog_enter():
 	if current_option_index == 0:
 		dialog_open = false
@@ -120,7 +123,7 @@ func handle_dialog_action():
 				current_option_index = 0
 			display_options()
 		if Input.is_action_just_pressed("action"):
-			handle_dialog_action()
+			handle_dialog_enter()
 
 
 func play_idle_animation():

@@ -113,6 +113,7 @@ adjustment_contrast = 1.09
 adjustment_saturation = 0.91
 
 [node name="world" type="Node2D"]
+position = Vector2( 1, 0 )
 script = ExtResource( 6 )
 
 [node name="YSort" type="YSort" parent="."]
