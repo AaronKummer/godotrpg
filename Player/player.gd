@@ -7,12 +7,15 @@ var velocity = Vector2.ZERO
 var last_direction = Vector2.ZERO
 var cpu: Node
 var dialog_open = false
+var dialog_just_opened = false
+var terminal_open = false
 
 onready var animation = $AnimationPlayer
 onready var interaction_area = $PlayerInteractionArea
 onready var interaction_shape = $PlayerInteractionArea/CollisionShape2D
 
 onready var dialog_canvas = get_node("../../../world/DialogCanvasLayer")
+onready var terminal = dialog_canvas.get_node("Terminal")
 onready var dialog_root = dialog_canvas.get_node("Dialog")
 onready var dialog_panel = dialog_root.get_node("Panel")
 onready var dialog_text = dialog_panel.get_node("RichTextLabel")
@@ -23,28 +26,33 @@ var items = []
 
 func _ready():
 	cpu = get_parent().get_node("cpu")
+	terminal.connect("terminal_closed", self, "_on_terminal_closed")
 
 func can_pickup():
 	return interaction_area.get_closest_object().name == "cpu"
 
-
+func _on_terminal_closed():
+	terminal_open = false
 
 func check_front():
 	var closest_object = interaction_area.get_closest_object()
 	if closest_object:
 		if closest_object.name == "cpu":
 			dialog_open = true
+			dialog_just_opened = true
 			dialog_text.bbcode_text = "This appears to be a cyber deck sitting on the side of the road.\nWhat do you want to do?"
 			display_options()
 
 func _process(delta):
 	dialog_root.visible = dialog_open
+	terminal.visible = terminal_open
+
 
 func _physics_process(delta):
 	var input_x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	var input_y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 
-	if dialog_root.visible == false :
+	if !dialog_open and !terminal_open:
 		velocity = Vector2(input_x, input_y).normalized() * SPEED
 
 		if velocity.length() > 0:
@@ -83,7 +91,7 @@ func _physics_process(delta):
 			if !dialog_open:
 				check_front()
 	
-	if dialog_root.visible:
+	if dialog_open:
 		handle_dialog_action()
 			
 
@@ -96,22 +104,30 @@ func display_options():
 			dialog_text.append_bbcode(options[i] + "\n")
 
 func handle_dialog_enter():
-	if current_option_index == 0:
+	
+	if current_option_index == 0 :
 		dialog_open = false
-	elif current_option_index == 1 and can_pickup():
+		dialog_just_opened = false
+		
+	elif current_option_index == 1 and can_pickup() :
 		items.append(interaction_area.get_closest_object().name)
 		interaction_area.get_closest_object().queue_free()
 		dialog_open = false
-	elif current_option_index == 2:
+		dialog_just_opened = false
+		
+	elif current_option_index == 2 :
 		var node_name = interaction_area.get_closest_object().name
+		print(node_name)
 		var thing = get_node("..").get_node(node_name)
 		thing.use()
 		dialog_open = false
+		dialog_just_opened = false
+		terminal_open = true
 
 func handle_dialog_action():
 	print("doing dialog stuff")
-#	
 	if dialog_open:
+		print('dialog is open')
 		if Input.is_action_just_pressed("ui_up"):
 			current_option_index -= 1
 			if current_option_index < 0:
@@ -123,8 +139,10 @@ func handle_dialog_action():
 				current_option_index = 0
 			display_options()
 		if Input.is_action_just_pressed("action"):
-			handle_dialog_enter()
-
+			if not dialog_just_opened:
+				handle_dialog_enter()
+				
+		dialog_just_opened = false  # Reset the flag here
 
 func play_idle_animation():
 	if last_direction.y < 0:

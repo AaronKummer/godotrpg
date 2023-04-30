@@ -8,10 +8,7 @@
 extents = Vector2( 8, 2.25 )
 
 [node name="StaticBody2D" type="StaticBody2D"]
-position = Vector2( 24, -13 )
-__meta__ = {
-"_edit_group_": true
-}
+position = Vector2( 99, -10 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 9.5, -16 )
@@ -19,10 +16,27 @@ scale = Vector2( 1.59375, 2 )
 texture = ExtResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
-position = Vector2( 10, -29 )
-scale = Vector2( 0.597656, 0.455078 )
+position = Vector2( 11, -33 )
+scale = Vector2( 0.236084, 0.186279 )
 texture = ExtResource( 2 )
-color = Color( 1, 0.301961, 0.941176, 1 )
+color = Color( 0.811765, 0.192157, 0.756863, 1 )
+energy = 0.73
+script = ExtResource( 3 )
+
+[node name="Light2D3" type="Light2D" parent="."]
+position = Vector2( 10, -29 )
+scale = Vector2( 0.437378, 0.356812 )
+texture = ExtResource( 2 )
+color = Color( 0.996078, 0.184314, 0.929412, 1 )
+energy = 0.06
+script = ExtResource( 3 )
+
+[node name="Light2D2" type="Light2D" parent="."]
+position = Vector2( 10, -29 )
+scale = Vector2( 0.00286865, 0.00848388 )
+texture = ExtResource( 2 )
+color = Color( 0.960784, 0.411765, 0.913725, 1 )
+energy = 1.94
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

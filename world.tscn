@@ -94,16 +94,17 @@ extents = Vector2( 1328.75, 10 )
 
 [sub_resource type="Environment" id=10]
 background_mode = 4
-ambient_light_color = Color( 0.694118, 0.803922, 0.780392, 1 )
-ambient_light_energy = 11.41
-ambient_light_sky_contribution = 0.44
+background_energy = 3.69
+ambient_light_color = Color( 0.607843, 0.0784314, 0.901961, 1 )
+ambient_light_energy = 9.56
+ambient_light_sky_contribution = 0.31
 fog_sun_amount = 0.23
 glow_enabled = true
-glow_intensity = 3.34
-glow_strength = 0.93
-glow_bloom = 0.15
+glow_intensity = 0.93
+glow_strength = 0.19
+glow_bloom = 0.17
 glow_blend_mode = 1
-glow_hdr_threshold = 0.37
+glow_hdr_threshold = 1.5
 glow_hdr_luminance_cap = 45.58
 glow_hdr_scale = 0.47
 glow_high_quality = true
@@ -183,13 +184,6 @@ shape = SubResource( 9 )
 position = Vector2( 424, 336 )
 shape = SubResource( 9 )
 
-[node name="Terminal" parent="." instance=ExtResource( 4 )]
-visible = false
-margin_left = -117.0
-margin_top = 57.0
-margin_right = -117.0
-margin_bottom = 57.0
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 10 )
 
@@ -201,3 +195,10 @@ layer = 19
 
 [node name="Dialog" parent="DialogCanvasLayer" instance=ExtResource( 5 )]
 visible = false
+
+[node name="Terminal" parent="DialogCanvasLayer" instance=ExtResource( 4 )]
+visible = false
+margin_left = -113.0
+margin_top = 79.0
+margin_right = -113.0
+margin_bottom = 79.0

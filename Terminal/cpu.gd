@@ -2,7 +2,7 @@ extends StaticBody2D
 
 
 func use():
-	var terminal = get_parent().get_parent().get_node("Terminal")
+	var terminal = get_parent().get_parent().get_node("DialogCanvasLayer/Terminal")
 	terminal.use()
 
 
