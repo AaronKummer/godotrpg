@@ -14,34 +14,15 @@ anchor_right = 0.981
 anchor_bottom = 0.965
 margin_left = 1.0
 margin_top = 1.0
-margin_right = -159.92
-margin_bottom = -70.7
+margin_right = -129.92
+margin_bottom = -55.7
 script = ExtResource( 2 )
 
-[node name="Panel" type="Panel" parent="."]
-margin_right = 154.0
-margin_bottom = 88.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="TerminalOutput" type="RichTextLabel" parent="."]
-margin_right = 155.0
-margin_bottom = 90.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Panel2" type="Panel" parent="."]
-margin_top = 88.0
-margin_right = 49.0
-margin_bottom = 102.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
 [node name="TextEdit" type="TextEdit" parent="."]
-margin_left = 50.0
-margin_top = 87.0
-margin_right = 154.0
-margin_bottom = 102.0
+margin_left = -1.0
+margin_top = -1.0
+margin_right = 183.0
+margin_bottom = 117.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = SubResource( 1 )

@@ -197,7 +197,6 @@ layer = 19
 visible = false
 
 [node name="Terminal" parent="DialogCanvasLayer" instance=ExtResource( 4 )]
-visible = false
 margin_left = -113.0
 margin_top = 79.0
 margin_right = -113.0
